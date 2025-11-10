@@ -1,0 +1,5 @@
+{
+  "name": "Therapist Finder Widget",
+  "description": "A widget for a website that helps users find therapists within a specific zipcode using the Gemini API.",
+  "requestFramePermissions": []
+}
