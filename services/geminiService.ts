@@ -2,14 +2,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { Therapist } from '../types';
 
-const API_KEY = process.env.API_KEY;
-
-if (!API_KEY) {
-  throw new Error("API_KEY environment variable not set");
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
-
 const responseSchema = {
   type: Type.ARRAY,
   items: {
@@ -37,6 +29,15 @@ const responseSchema = {
 };
 
 export async function findTherapists(zipcode: string): Promise<Therapist[]> {
+  const API_KEY = process.env.API_KEY;
+
+  if (!API_KEY) {
+    console.error("API_KEY environment variable not set");
+    throw new Error("API_KEY environment variable not set");
+  }
+
+  const ai = new GoogleGenAI({ apiKey: API_KEY });
+
   try {
     const prompt = `Find 5-7 licensed therapists or mental health clinics in the zipcode ${zipcode}. Provide their name, a primary specialty, full address, and phone number.`;
 
